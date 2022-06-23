@@ -5,9 +5,13 @@ import java.security.MessageDigest;
 public class User {
 
     private String firstName;
+
     private String lastName;
+
     private String uuid;
+
     private byte pinHash[];
+
     private ArrayList<Account> accounts;
 
     /**
@@ -55,5 +59,23 @@ public class User {
      */
     public String getUUID(){
         return this.uuid;
+    }
+
+    /**
+     * Check whether a given pin matches the user's pin
+     * @param aPin the pin to check
+     * @return whether the pin is a valid or not
+     */
+    public boolean validatePin(String aPin){
+        try{
+            MessageDigest md = MessageDigest.getInstance("MD5");
+            return MessageDigest.isEqual(md.digest(aPin.getBytes()), this.pinHash);
+            }
+        } catch (NoSuchAlgorithmException e){
+            System.err.println("Error: NoSuchAlgorithmException");
+            e.printStackTrace();
+            System.exit(1);
+        }
+        return false;
     }
 }

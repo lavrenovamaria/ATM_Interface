@@ -4,8 +4,16 @@ import java.util.Random;
 public class Bank {
 
     private String name;
+
     private ArrayList<User> user;
+
     private  ArrayList<Account> accounts;
+
+    public Bank(String name) {
+        this.name = name;
+        this.users = new ArrayList<User>();
+        this.accounts = new ArrayList<Account>();
+    }
 
     /**
      * Generate a new universally unique ID for a user
@@ -59,7 +67,25 @@ public class Bank {
         return uuid;
     }
 
-    public void addAccount(Account anAcct){
-        this.accounts.add(anAcct);
+    public void addUser(String firstName, String lastName, String pin){
+        User newUser = new User(firstName, lastName, pin, this);
+        this.user.add(newUser))));
+
+        //create a savings account for the user and add to User and Bank
+        Account newAccount = new Account("Savings", newUser, this);
+        newUser.addAccount(NewAccount);
+        this.accounts.add(NewAccount);
+
+        return newUser;
+    }
+
+    public User userLogin(String userID, String pin){
+        for(User u : this.users){
+            if (u.getUUID().compareTo(userID) == 0 && u.validatePin(pin)){
+                return u;
+            }
+        }
+        //if we get here, the user was not found or incorrect pin
+        return null;
     }
 }
