@@ -5,7 +5,7 @@ public class Bank {
 
     private String name;
 
-    private ArrayList<User> user;
+    private ArrayList<User> users;
 
     private  ArrayList<Account> accounts;
 
@@ -33,7 +33,7 @@ public class Bank {
             }
             //check if unique
             nonUnique = false;
-            for(User u : this.user){
+            for(User u : this.users){
                 if (uuid.compareTo(u.getUUID()) == 0){
                     nonUnique = true;
                     break;
@@ -67,14 +67,18 @@ public class Bank {
         return uuid;
     }
 
-    public void addUser(String firstName, String lastName, String pin){
+    public void addAccount(Account anAcct){
+        this.accounts.add(anAcct);
+    }
+
+    public User addUser(String firstName, String lastName, String pin){
         User newUser = new User(firstName, lastName, pin, this);
-        this.user.add(newUser))));
+        this.users.add(newUser);
 
         //create a savings account for the user and add to User and Bank
         Account newAccount = new Account("Savings", newUser, this);
-        newUser.addAccount(NewAccount);
-        this.accounts.add(NewAccount);
+        newUser.addAccount(newAccount);
+        this.accounts.add(newAccount);
 
         return newUser;
     }
@@ -87,5 +91,13 @@ public class Bank {
         }
         //if we get here, the user was not found or incorrect pin
         return null;
+    }
+
+    /**
+     * Get the name of the bank
+     * @return the name
+     */
+    public String getName(){
+        return this.name;
     }
 }

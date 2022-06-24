@@ -70,7 +70,6 @@ public class User {
         try{
             MessageDigest md = MessageDigest.getInstance("MD5");
             return MessageDigest.isEqual(md.digest(aPin.getBytes()), this.pinHash);
-            }
         } catch (NoSuchAlgorithmException e){
             System.err.println("Error: NoSuchAlgorithmException");
             e.printStackTrace();

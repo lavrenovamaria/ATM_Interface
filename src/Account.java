@@ -30,7 +30,7 @@ public class Account {
      * Get the account ID
      * @return the uuid
      */
-    public String getUuid(){
+    public String getUUID(){
         return this.uuid;
     }
 }
